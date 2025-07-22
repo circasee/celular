@@ -1,0 +1,55 @@
+{
+    "spec": "0.1.0-beta",
+    "branch": "default",
+    "config": {
+        "version": "0.1.0",
+        "globals": {
+            "username": "admin"
+        },
+        "vars": {
+            "mount_points": [
+                "/media",
+                "/mnt/data",
+                "/mnt/usb",
+                "/run/media"
+            ],
+            "current_working_directories": [
+                "/home",
+                "/media"
+            ],
+            "process_names": [
+              "firefox", "firefox-esr", "chrome", "chromium", "chromium-browser", "brave", "vivaldi",
+
+              "code", "code-oss", "sublime_text", "emacs", "gedit", "mousepad", "nano", "vim", "nvim",
+
+              "zsh", "bash", "fish", "tmux", "screen",
+
+              "gnome-terminal-", "xfce4-terminal", "xterm", "alacritty", "tilix", "konsole", "terminator",
+
+              "nautilus", "dolphin", "thunar", "pcmanfm",
+
+              "discord", "slack", "zoom", "teams", "signal-desktop", "element-desktop",
+
+              "vlc", "mpv", "spotify", "rhythmbox", "clementine", "audacious",
+
+              "java"
+            ]
+
+        },
+
+        "expressions":[
+            {
+                "uses": ["processes"],
+                "expr": "vars.current_working_directories.filter(cwd, procs.filter(proc, type(proc['cwd']) == string && proc['cwd'].startsWith(cwd))) != []"
+            },
+            {
+                "uses": ["processes", "common_users"],
+                "expr": "vars.process_names.filter(name, procs.filter(proc, type(proc['name']) == string && proc['name'] == name && ( proc['username'] == username || proc['username'] in common_users) )) != []"
+            },
+            {
+                "uses": ["mounts"],
+                "expr": "vars.mount_points.filter(mntpt, mounts.filter(mount, type(mount) == map && type(mount['mountpoint']) == string && mount['mountpoint'].startsWith(mntpt))) != []"
+            }
+        ]
+    }
+}

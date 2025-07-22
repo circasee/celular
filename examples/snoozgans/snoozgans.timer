@@ -1,0 +1,10 @@
+[Unit]
+Description=Snoozgans system usage timer
+
+[Timer]
+OnCalendar=Mon..Fri 22:30
+OnCalendar=Sat,Sun 20:00
+Persistent=false
+
+[Install]
+WantedBy=timers.target

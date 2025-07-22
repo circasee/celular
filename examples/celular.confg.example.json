@@ -1,0 +1,39 @@
+{
+    "spec": "0.1.0-beta",
+    "branch": "examples",
+    "config": {
+        "version": "0.1.1",
+        "globals": {
+            "username": "user"
+        },
+        "vars": {
+            "mount_points": [
+                "/mnt/ebs"
+            ],
+            "current_working_directories": [
+                "/usr/local/BurpSuitePro",
+                "/mnt/ebs"
+                
+            ],
+            "process_names": [
+                "chrome", "java", "code", "code-oss", "mousepad", "x-www-browser", "firefox-esr", "zsh", "bash", "screen"
+            ]
+
+        },
+
+        "expressions":[
+            {
+                "uses": ["processes"],
+                "expr": "vars.current_working_directories.filter(cwd, procs.filter(proc, type(proc['cwd']) == string && proc['cwd'].startsWith(cwd))) != []"
+            },
+            {
+                "uses": ["processes", "common_users"],
+                "expr": "vars.process_names.filter(name, procs.filter(proc, type(proc['name']) == string && proc['name'] == name && ( proc['username'] == username || proc['username'] in common_users) )) != []"
+            },
+            {
+                "uses": ["mounts"],
+                "expr": "vars.mount_points.filter(mntpt, mounts.filter(mount, type(mount) == map && type(mount['mountpoint']) == string && mount['mountpoint'].startsWith(mntpt))) != []"
+            }
+        ]
+    }
+}
