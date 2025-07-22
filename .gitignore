@@ -1,0 +1,48 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Test and coverage outputs
+.coverage
+.pytest_cache/
+.tox/
+.nox/
+htmlcov/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Logs and backups
+*.log
+*.bak
+*.tmp
+*.swp
+
+# Editor and system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+Icon?
+Desktop.ini
+ehthumbs.db
+
+# Jupyter and IPython
+.ipynb_checkpoints/
+
+# Ignore anything accidentally dumped
+*.orig
+*.rej
